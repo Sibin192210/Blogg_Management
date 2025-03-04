@@ -1,0 +1,83 @@
+/* Container background with a vibrant nature-inspired gradient */
+.loginbg {
+    background: linear-gradient(to right, #ff914d, #0b8457);    
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loginpage {
+    width: 400px;
+    max-width: 90%;
+    padding: 4.5%;
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.15); /* Light transparent background */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Soft shadow */
+    transition: all 0.3s ease-in-out;
+}
+
+.loginpage:hover {
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+    transform: scale(1.02);
+}
+
+
+#logintext {
+    font-weight: 900;
+    font-size: xx-large;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.form-control {
+    background-color: transparent;
+    border: none;
+    border-bottom: 2px solid white;
+    border-radius: 0;
+    color: white;
+    font-weight: 500;
+    padding: 8px;
+    width: 100%;
+    outline: none;
+    transition: border-bottom 0.3s ease-in-out;
+}
+
+.form-control:focus,
+.form-control:hover {
+    background-color: transparent;
+    border-bottom: 2px solid white;
+    outline: none !important;
+    color: white;
+    box-shadow: none !important;
+
+}
+
+.btn {
+    padding: 7px;
+    background-color: rgb(8, 190, 84);
+    color: black !important;  
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: all 0.3s ease-in-out;
+    width: 100%;
+    margin: 20px 0 !important;
+}
+
+.btn:hover {
+    background-color: rgb(8, 186, 82);
+    transform: scale(1.05);
+}
+
+a.link-body-emphasis {
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.3s;
+}
+
+a.link-body-emphasis:hover {
+    color: yellow;
+}
+
