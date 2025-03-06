@@ -16,6 +16,7 @@ function Homepage() {
           <div className="content">
           <h1>EXPLORE . DREAM . DISCOVER</h1>
           <p>This is a world travel blog featuring beautiful destinatiom, new experience and hidden places around the globe.</p>
+          <button>Explore more</button>
         </div>
         
       </div>
