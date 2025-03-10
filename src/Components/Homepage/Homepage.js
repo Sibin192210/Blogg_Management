@@ -14,8 +14,8 @@ function Homepage() {
           <video src={homepageVideo}  autoPlay loop muted></video>
 
           <div className="content">
-          <h1>EXPLORE . DREAM . DISCOVER</h1>
-          <p>This is a world travel blog featuring beautiful destinatiom, new experience and hidden places around the globe.</p>
+          <h1>EXPLORE. DREAM. DISCOVER</h1>
+          <p>This is a world travel blog featuring beautiful destination, new experience and hidden places around the globe.</p>
           <button>Explore more</button>
         </div>
         

@@ -1,29 +1,61 @@
-#Name{
-        font-family: Copperplate, Papyrus, fantasy;
-        font-size: 40px;
-        font-weight: bold;
-        color: #e5ffd5;
-        text-align: center;
-        text-shadow: 4px 4px 6px rgba(255, 116, 116, 0.4), -4px -4px 6px rgba(0, 0, 0, 0.4);
-    }
-.navbar-collapse{
-    justify-content: flex-end;
-}
-nav {
-    font-weight: 500;
+/* Navbar Brand */
+#Name {
+    font-family: Copperplate, Papyrus, fantasy;
+    font-size: 40px;
+    font-weight: 900; 
+    color: #e5ffd5;
+    text-shadow: 4px 4px 6px rgba(255, 116, 116, 0.4), -4px -4px 6px rgba(0, 0, 0, 0.4);
+  }
+  
+  /* Navbar Container */
+  nav {
+    font-weight: 700; 
     font-size: 25px;
-    font-family: sans-seri;
+    font-family: sans-serif;
     box-shadow: 4px 4px 10px #00000032;
-    background-color: rgba(65, 106, 59, 0.404); 
-
-}
-
-.nav-link{
+    background-color: transparent;
+  }
+  
+  /* Navbar Links */
+  .nav-link {
     margin-left: 25px;
+    color: #fffffe;
+    font-weight: 700; /* Bolder text */
+    transition: color 0.3s ease, background-color 0.3s ease; 
+  }
+  
+  .nav-link:hover {
+    color: rgb(255, 255, 255); 
+    text-decoration: underline;
+    background-color: rgba(255, 255, 255, 0.1); 
+  }
+  
+  /* Dropdown Menu */
+  .dropdown-menu {
+    background-color: rgba(65, 106, 59, 0.9); 
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
+  }
+  
+  .dropdown-item {
     color: #c3ff9d;
-}
-.nav-link:hover {
-    color: rgb(255, 255, 255); /* Change text color on hover */
-}
-
-      
+    font-weight: 600; 
+    padding: 10px 20px;
+    transition: background-color 0.3s ease, color 0.3s ease; 
+  }
+  
+  .dropdown-item:hover {
+    color: rgb(255, 255, 255); 
+    background-color: rgba(255, 255, 255, 0.1); 
+  }
+  
+  /* Navbar Toggler Icon */
+  .navbar-toggler {
+    border: none;
+  }
+  
+  .navbar-toggler:focus {
+    outline: none;
+    box-shadow: none;
+  }
