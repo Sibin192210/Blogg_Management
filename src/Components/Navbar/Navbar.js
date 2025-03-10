@@ -9,7 +9,7 @@ function Navbar() {
       <div className="container-fluid">
         <Link className="navbar-brand" to="/">
           <img src={logo} alt="Logo" width="50" height="50" />
-          <span id="Name">Traveller'</span>
+          <span id="Name">Traveller's</span>
         </Link>
         <button
           className="navbar-toggler bg-success"
