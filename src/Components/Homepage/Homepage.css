@@ -48,14 +48,30 @@
     height: 100%; 
     padding-top: 140px;
   }
-.cards{
-  color: white;
-  font-size: 23px;
-  font-weight: 645;
-  box-shadow: 4px 4px 10px #00000032;
-  background-color: rgba(0, 0, 0, 0.2);
-  padding: 3%;
-}
+  .cards {
+    box-shadow: 4px 4px 10px #00000032;
+    background-color: rgba(0, 0, 0, 0.2);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 3%;
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .card-text {
+    color: #ffffff;
+    font-size: 22px; 
+    font-family: 'Exo 2', sans-serif; 
+    font-weight: 400;
+    line-height: 1.5; 
+    margin-bottom: 15px;
+    text-align: justify;
+    letter-spacing: 0.4px;
+  }
+  
 .rounded{
   width: 25%;
   padding-right: 3%;

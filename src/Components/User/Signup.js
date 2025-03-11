@@ -45,7 +45,7 @@ function Signup() {
 
         <div className="text-center">
           <p>
-            Already have an account? <Link to='/Login' class="text-primary fw-semibold link-body-emphasis link-offset-2 link-underline-opacity-0 link-underline-opacity-0-hover">Login</Link>
+            Already have an account? <Link to='/Login' class="text-black fw-semibold link-body-emphasis link-offset-2 link-underline-opacity-0 link-underline-opacity-0-hover">Login</Link>
           </p>
         </div>
 
