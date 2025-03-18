@@ -1,0 +1,59 @@
+.contactpage {
+    width: 420px;
+    height: 100%;
+    position: fixed;
+    right: -420px; /* Default - hidden */
+    top: 0;
+    z-index: 9999;
+    color: #fff;
+    background-color: #1c1c1c;
+    padding: 30px;
+    transition: right 0.8s ease-in-out; /* Smooth sliding effect */
+}
+  
+.contactpage.active {
+    right: 0; /* Moves into view when active */
+}
+#Name {
+    font-family: Copperplate, Papyrus, fantasy;
+    font-size: 40px;
+    font-weight: 900; 
+    color: #e5ffd5;
+    text-shadow: 4px 4px 6px rgba(255, 116, 116, 0.4), -4px -4px 6px rgba(0, 0, 0, 0.4);
+}
+
+.heading{
+    font-weight: 500;
+    font-family: 'Exo 2';
+    margin-top: 0;
+    line-height: 1.5;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    font-size: 23px;
+    color: white !important;
+}
+p{
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 24px;
+    margin-bottom: 15px;
+}
+ul{
+    list-style: none;
+}
+.contactdetails{
+    margin-left: -20px;   
+    line-height: 2.5;
+    font-size: 17px;
+    font-weight: 400;
+}
+.contacticon{
+    width: 24px;
+    margin-right: 10px;
+}
+.media{
+    margin: 65px 115px;
+}
+.medialogo{
+    padding: 0px 5px;
+}

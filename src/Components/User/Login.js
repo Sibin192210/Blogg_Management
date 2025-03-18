@@ -1,7 +1,6 @@
 import React from 'react'
 import './Login.css'
 import { Link } from 'react-router-dom'
-import Signup from './Signup'
 function Login() {
   return (
     <div className='loginbg'>
@@ -28,7 +27,7 @@ function Login() {
           </div>
         </div>
 
-        <p className="text-center"><a href="#" class="link-body-emphasis link-offset-2 link-underline-opacity-0 link-underline-opacity-0-hover">Forgot password</a></p>
+        <p className="text-center"><a href="#" class="text-black fw-semibold link-body-emphasis link-offset-2 link-underline-opacity-0 link-underline-opacity-0-hover">Forgot password</a></p>
 
         <div class="d-grid">
           <button class="btn" type="button">Login</button>
@@ -41,7 +40,7 @@ function Login() {
         </div>
 
         <div className="text-center mt-3">
-          <p><Link to='/Signup' class="text-primary fw-semibold link-body-emphasis link-offset-2 link-underline-opacity-0 link-underline-opacity-0-hover">Sign up</Link></p>
+          <p><Link to='/Signup' class="text-black fw-semibold link-body-emphasis link-offset-2 link-underline-opacity-0 link-underline-opacity-0-hover">Sign up</Link></p>
         </div>
 
       </div>
