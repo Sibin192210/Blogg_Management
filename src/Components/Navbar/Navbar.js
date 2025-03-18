@@ -1,16 +1,42 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import logo from "../../images/logo.png";
-import './Navbar.css';
+import "./Navbar.css";
 import { Link } from "react-router-dom";
 
 function Navbar({ setIsContactOpen }) {
   console.log("Navbar received setIsContactOpen:", setIsContactOpen);
 
+  const [navBackground, setNavBackground] = useState("transparent");
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setNavBackground("#184E47");
+      } else {
+        setNavBackground("transparent");
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+
   return (
-    <nav className="navbar fixed-top navbar-expand-xxl p-3">
+    <nav
+      className="navbar fixed-top navbar-expand-xxl p-3"
+      style={{
+        backgroundColor: navBackground,
+        transition: "background-color 0.8s cubic-bezier(0.4, 0, 0.2, 1)",
+      }}
+      
+    >
       <div className="container-fluid">
         <Link className="navbar-brand" to="/">
-          <img src={logo} style={{ marginTop: '-15px' }} alt="Logo" width="50" height="50" />
+          <img src={logo} style={{ marginTop: "-15px" }} alt="Logo" width="50" height="50" />
           <span id="Name">Traveller's</span>
         </Link>
         <button
@@ -33,7 +59,7 @@ function Navbar({ setIsContactOpen }) {
               <Link className="nav-link" to="#" onClick={() => setIsContactOpen(true)}>Contact Us</Link>
             </li>
             <li className="nav-item dropdown">
-              <a className="nav-link dropdown-toggle" href="1" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <a className="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Login
               </a>
               <ul className="dropdown-menu">
