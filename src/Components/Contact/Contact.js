@@ -3,12 +3,7 @@ import "./Contact.css";
 import { Link } from "react-router-dom";
 import logo from "../../images/logo.png";
 import { CIcon } from "@coreui/icons-react";
-import {
-  cilClock,
-  cilPhone,
-  cilLocationPin,
-  cilEnvelopeClosed,
-} from "@coreui/icons";
+import { cilClock,cilPhone,cilLocationPin,cilEnvelopeClosed} from "@coreui/icons";
 import instalogo from "../../images/instalogo.png";
 import facebooklogo from "../../images/facebooklogo.png";
 import twitterlogo from "../../images/twitterlogo.png";
@@ -77,9 +72,15 @@ function Contact({ isOpen, setIsContactOpen }) {
       </div>
       <div>
         <div className="media">
-          <img className="medialogo" src={instalogo} alt="" />
-          <img className="medialogo" src={facebooklogo} alt="" />
-          <img className="medialogo" src={twitterlogo} alt="" />
+          <a href="https://www.instagram.com/">
+            <img className="medialogo" src={instalogo} alt="" />
+          </a>
+          <a href="https://www.facebook.com/">
+            <img className="medialogo" src={facebooklogo} alt="" />
+          </a>
+          <a href="https://x.com/?lang=en">
+            <img className="medialogo" src={twitterlogo} alt="" />
+          </a>
         </div>
       </div>
     </div>
