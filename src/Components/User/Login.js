@@ -1,7 +1,11 @@
-import React from 'react'
+import { useEffect } from 'react'
 import './Login.css'
 import { Link } from 'react-router-dom'
-function Login() {
+function Login({ setShowNavbarFooter }) {
+  useEffect(() => {
+    setShowNavbarFooter(false); // Hide Navbar & Footer on Login Page
+    return () => setShowNavbarFooter(true); // Show them again when leaving
+  }, [setShowNavbarFooter]);
   return (
     <div className='loginbg'>
 

@@ -52,17 +52,17 @@ function Contact({ isOpen, setIsContactOpen }) {
       <div>
         <h3 className="heading">Contact Info</h3>
         <ul>
-          <li className="contactdetails">
+          <li className="contactdetails ">
             <CIcon className="contacticon" icon={cilLocationPin} />
-            Kanyakumari - 629163, Tamil Nadu, India
+            <a href="https://maps.app.goo.gl/s98hhqRXy93BHBrJ6">Kanyakumari - 629163, Tamil Nadu, India</a>
           </li>
           <li className="contactdetails">
             <CIcon className="contacticon" icon={cilPhone} />
-            +91 9687767705
+            <a href="tel:+919687767705">+91 9687767705</a>
           </li>
           <li className="contactdetails">
             <CIcon className="contacticon" icon={cilEnvelopeClosed} />
-            sibisibin001@gmail.com
+            <a href="mailto:sibisibin001@gmail.com">sibisibin001@gmail.com</a>
           </li>
           <li className="contactdetails">
             <CIcon className="contacticon" icon={cilClock} />

@@ -46,14 +46,29 @@ ul{
     line-height: 2.5;
     font-size: 17px;
     font-weight: 400;
+    text-decoration: none;
 }
 .contacticon{
     width: 24px;
+    gap: 15px;
     margin-right: 10px;
+}
+a{
+    text-decoration: none;
+    color: #fff;
+}
+a:hover{
+    text-decoration: none;
+    color: rgb(85, 219, 87);
+
 }
 .media{
     margin: 65px 115px;
 }
 .medialogo{
-    padding: 0px 5px;
+    padding: 0px 5px;  
+    transition: transform 0.3s ease-in-out;
+}
+.medialogo:hover{
+    transform: scale(1.3);
 }

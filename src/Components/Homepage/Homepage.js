@@ -1,13 +1,14 @@
-import React from "react";
+import React,{useEffect} from "react";
 import "./Homepage.css";
 import bodycard from "../../images/bodycard.jpg";
 import homepageVideo from "../../images/Homepage-vid.mp4";
-import Navbar from "../Navbar/Navbar";
 import background from "../../images/background2.jpg";
-function Homepage() {
+function Homepage({ setShowNavbarFooter }) {
+  useEffect(() => {
+    setShowNavbarFooter(true); 
+  }, [setShowNavbarFooter]);
   return (
     <div>
-      <Navbar />
 
       <div className="videocontent">
         
@@ -118,13 +119,13 @@ function Homepage() {
 
                     <div className="col-lg-6 col-md-6 col-sm-6 ">
                       <div className="counter-item d-flex align-items-center">
-                        <div
+                      <div
                           className="counter-icon bg-primary text-white d-flex align-items-center justify-content-center rounded-circle"
                           style={{ width: "50px", height: "50px" }}
                         ></div>
                         <div className="counter-content text-left ms-3">
                           <h3 className="mb-0">1M+</h3>
-                          <p className="mb-0">Happy Customer</p>
+                          <p className="mb-0">Customer</p>
                         </div>
                       </div>
                     </div>
@@ -133,7 +134,7 @@ function Homepage() {
               </div>
             </div>
           </div>
-        </div>
+      </div>
     </div>
   );
 }

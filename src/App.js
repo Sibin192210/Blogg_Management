@@ -7,20 +7,23 @@ import Homepage from './Components/Homepage/Homepage';
 import Contact from './Components/Contact/Contact';
 import Navbar from './Components/Navbar/Navbar';
 import { useState } from 'react';
+import Footer from './Components/Footer/Footer';
 
 function App() {
   const [isContactOpen, setIsContactOpen] = useState(false);
+  const [showNavbarFooter, setShowNavbarFooter] = useState(true);
+
   return (
     <BrowserRouter>
-      
-      
-      <Routes>       
-        {/* hi */}
-        <Route path="/" element={<Homepage />} />
-        <Route path="/Signup" element={<Signup />} />
-        <Route path="/Login" element={<Login />} />
+      {showNavbarFooter && <Navbar setIsContactOpen={setIsContactOpen} />}
+
+      <Routes>
+        <Route path="/" element={<Homepage setShowNavbarFooter={setShowNavbarFooter} />} />
+        <Route path="/Signup" element={<Signup setShowNavbarFooter={setShowNavbarFooter} />} />
+        <Route path="/Login" element={<Login setShowNavbarFooter={setShowNavbarFooter} />} />
       </Routes>
-      <Navbar setIsContactOpen={setIsContactOpen} />
+
+      {showNavbarFooter && <Footer setIsContactOpen={setIsContactOpen} />}
       <Contact isOpen={isContactOpen} setIsContactOpen={setIsContactOpen} />
     </BrowserRouter>
   );

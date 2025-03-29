@@ -1,0 +1,175 @@
+/* Footer Container */
+.footerparent {
+    background: linear-gradient(to left, rgb(52, 49, 64), #0e4c45);
+    color: rgb(255, 243, 226);
+    padding: 60px 50px;
+    border-top-left-radius: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Footer Layout */
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    width: 100%;
+    margin-left: 12%;
+}
+
+/* Footer Sections */
+.footercontent1,
+.footercontent2,
+.footercontent3,
+.footercontent4 {
+    flex: 1;
+    min-width: 230px;
+    padding: 20px;
+}
+
+/* Ensuring equal spacing */
+.footercontent1 {
+    max-width: 320px;
+}
+
+.footercontent2,
+.footercontent3 {
+    max-width: 230px;
+}
+
+.footercontent4 {
+    max-width: 230px;
+}
+
+/* Footer Bottom Section */
+.footer-bottom {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid rgba(128, 241, 179, 0.4);
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.8);
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: -40px;
+}
+
+/* Brand Name Styling */
+#brandname {
+    font-family: "Copperplate", "Papyrus", fantasy;
+    font-size: 35px;
+    font-weight: 800;
+    color: #e5ffd5;
+    text-shadow: 3px 3px 5px rgba(255, 116, 116, 0.5);
+}
+
+/* Logo */
+.footer-logo {
+    width: 45px;
+    height: 45px;
+    margin-right: 5px;
+    margin-top: -15px;
+}
+
+/* Footer Titles */
+.footertitle {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* Contact Details */
+.footercontactdetails {
+    color: rgb(255, 243, 226);
+    text-decoration: none;
+    display: block;
+    margin-bottom: 12px;
+    font-size: 16px;
+}
+
+.footercontactdetails:hover {
+    color: rgb(85, 219, 87);
+}
+
+/* Footer Links */
+.footerlink {
+    color: rgb(255, 243, 226);
+    text-decoration: none;
+    font-size: 16px;
+    display: block;
+    margin-bottom: 10px;
+    transition: color 0.3s ease;
+}
+
+.footerlink:hover {
+    color: rgb(85, 219, 87);
+}
+
+/* Social Media Icons */
+.social-icons {
+    display: flex;
+    gap: 15px;
+}
+
+.social-icons a {
+    display: flex;
+    align-items: center;
+}
+
+.social-icons img {
+    width: 30px;
+    height: 30px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.social-icons img:hover {
+    transform: scale(1.2);
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .footer-container {
+        flex-wrap: wrap;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .footercontent1,
+    .footercontent2,
+    .footercontent3,
+    .footercontent4 {
+        width: 45%;
+    }
+}
+
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+        margin-left: -1.8%;
+    }
+
+    .footercontent1,
+    .footercontent2,
+    .footercontent3,
+    .footercontent4 {
+        width: 100%;
+        padding: 15px 0;
+    }
+
+    #brandname {
+        font-size: 30px;
+    }
+
+    .footerlink {
+        display: block;
+        margin: 8px 0;
+    }
+
+    .social-icons {
+        justify-content: center;
+    }
+}
