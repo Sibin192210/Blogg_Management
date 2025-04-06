@@ -1,59 +1,105 @@
 /* Navbar Brand */
 #Name {
-    font-family: Copperplate, Papyrus, fantasy;
-    font-size: 40px;
-    font-weight: 900; 
-    color: #e5ffd5;
-    text-shadow: 4px 4px 6px rgba(255, 116, 116, 0.4), -4px -4px 6px rgba(0, 0, 0, 0.4);
+  font-family: Copperplate, Papyrus, fantasy;
+  font-size: 40px;
+  font-weight: 900;
+  color: #e5ffd5;
+  text-shadow: 4px 4px 6px rgba(255, 116, 116, 0.4), -4px -4px 6px rgba(0, 0, 0, 0.4);
+}
+
+/* Navbar Container */
+nav {
+  font-weight: 700;
+  font-size: 25px;
+  font-family: 'Times New Roman', serif;
+  box-shadow: 10px 10px 10px #00000032;
+  background-color: transparent;
+}
+
+/* Navbar Links */
+.nav-link {
+  margin-left: 25px;
+  color: #fffffe;
+  font-weight: 700; /* Bolder text */
+  transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.nav-link:visited, .nav-link:active {
+  color: #fffffe; 
+}
+
+/* Hover effect on links */
+.nav-link:hover {
+  color: rgb(85, 219, 87);
+}
+
+/* Dropdown Menu */
+.dropdown-menu {
+  background-color: rgba(65, 106, 59, 0.9);
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.dropdown-item {
+  color: #f2ffeb;
+  font-weight: 600;
+  padding: 10px 20px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dropdown-item:hover {
+  color: rgb(255, 255, 255);
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Navbar Toggler Icon */
+.navbar-toggler {
+  border: none;
+}
+
+.navbar-toggler:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+/* Ensure background color when navbar is collapsed */
+@media (max-width: 991px) {  
+  .navbar-collapse {
+    background-color: #184E47 !important;  
+    padding: 10px;
+    border-radius: 5px;
   }
-  
-  /* Navbar Container */
+}
+/* 📱 Extra small devices (max-width: 480px) */
+@media (max-width: 480px) {
+  /* Reduce brand text size */
+  #Name {
+    font-size: 28px;
+    text-shadow: 2px 2px 4px rgba(255, 116, 116, 0.4), -2px -2px 4px rgba(0, 0, 0, 0.4);
+  }
+
+  /* Make nav font smaller for better spacing */
   nav {
-    font-weight: 700; 
-    font-size: 25px;
-    font-family:sans;
-    box-shadow: 10px 10px 10px #00000032;
-    background-color: transparent;
+    font-size: 18px;
   }
-  
-  /* Navbar Links */
+
   .nav-link {
-    margin-left: 25px;
-    color: #fffffe;
-    font-weight: 700; /* Bolder text */
-    transition: color 0.3s ease, background-color 0.3s ease; 
+    margin-left: 10px;
+    font-size: 16px;
   }
-  
-  .nav-link:hover {
-    color: rgb(85, 219, 87); 
-  }
-  
-  /* Dropdown Menu */
-  .dropdown-menu {
-    background-color: rgba(65, 106, 59, 0.9); 
-    border: none;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
-  }
-  
+
   .dropdown-item {
-    color: #f2ffeb;
-    font-weight: 600; 
-    padding: 10px 20px;
-    transition: background-color 0.3s ease, color 0.3s ease; 
+    font-size: 15px;
   }
-  
-  .dropdown-item:hover {
-    color: rgb(255, 255, 255); 
-    background-color: rgba(255, 255, 255, 0.1); 
+
+  .navbar-collapse {
+    padding: 8px;
   }
-  
-  /* Navbar Toggler Icon */
+
+  /* Improve toggle button spacing */
   .navbar-toggler {
-    border: none;
+    padding: 6px 10px;
   }
-  
-  .navbar-toggler:focus {
-    outline: none;
-    box-shadow: none;
-  }
+}
+
