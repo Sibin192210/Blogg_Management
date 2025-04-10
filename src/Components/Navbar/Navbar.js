@@ -10,11 +10,7 @@ function Navbar({ setIsContactOpen }) {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setNavBackground("#184E47");
-      } else {
-        setNavBackground("transparent");
-      }
+      setNavBackground(window.scrollY > 50 ? "#184E47":"transparent")
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -41,6 +37,7 @@ function Navbar({ setIsContactOpen }) {
         </Link>
         <button
           className="navbar-toggler bg-success"
+          onClick={()=>{setNavBackground("#184E47")}}
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#navbarNavDropdown"
@@ -59,9 +56,9 @@ function Navbar({ setIsContactOpen }) {
               <Link className="nav-link" to="#" onClick={() => setIsContactOpen(true)}>Contact Us</Link>
             </li>
             <li className="nav-item dropdown">
-              <a className="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <Link className="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Login
-              </a>
+              </Link>
               <ul className="dropdown-menu">
                 <li><Link className="dropdown-item" to="/login">Login</Link></li>
                 <li><Link className="dropdown-item" to="/signup">Sign up</Link></li>
