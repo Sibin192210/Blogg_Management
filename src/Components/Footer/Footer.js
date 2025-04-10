@@ -7,6 +7,9 @@ import twitterlogo from "../../images/twitterlogo.png";
 import { Link } from "react-router-dom";
 
 function Footer({ setIsContactOpen }) {
+  //automatically asining the current date
+  const d = new Date();
+  let year = d.getFullYear();
   return (
     <div className="footerparent">
       <div className="container footer-container">
@@ -91,7 +94,7 @@ function Footer({ setIsContactOpen }) {
       </div>
 
       {/* Footer Bottom Section */}
-      <div className="footer-bottom">Easy Turbo © All Rights Reserved</div>
+      <div className="footer-bottom">Easy Turbo ©{year} All Rights Reserved</div>
     </div>
   );
 }

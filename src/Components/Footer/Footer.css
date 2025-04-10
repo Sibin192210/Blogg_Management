@@ -3,7 +3,6 @@
     background: linear-gradient(to left, rgb(52, 49, 64), #0e4c45);
     color: rgb(255, 243, 226);
     padding: 60px 50px;
-    border-top-left-radius: 200px;
     display: flex;
     flex-direction: column;
     align-items: center;

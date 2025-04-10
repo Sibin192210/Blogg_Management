@@ -7,6 +7,7 @@ import { cilClock,cilPhone,cilLocationPin,cilEnvelopeClosed} from "@coreui/icons
 import instalogo from "../../images/instalogo.png";
 import facebooklogo from "../../images/facebooklogo.png";
 import twitterlogo from "../../images/twitterlogo.png";
+import { RiCloseLargeLine } from "react-icons/ri";
 
 function Contact({ isOpen, setIsContactOpen }) {
   return (
@@ -14,20 +15,8 @@ function Contact({ isOpen, setIsContactOpen }) {
       <button
         className="close-btn"
         onClick={() => setIsContactOpen(false)}
-        style={{
-          position: "absolute",
-          top: "10px",
-          right: "10px",
-          color: "white",
-          backgroundColor: "transparent",
-          border: "none",
-          padding: "5px 10px",
-          cursor: "pointer",
-          fontSize: "30px",
-          fontWeight: "bold",
-        }}
       >
-        X
+        <RiCloseLargeLine />
       </button>
       <div>
         <Link className="navbar-brand" id="brand" to="/">
