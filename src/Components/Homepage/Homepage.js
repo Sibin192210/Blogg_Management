@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { Link } from 'react-router-dom';
 import "./Homepage.css";
 import homepageVideo from "../../images/Homepage-vid.mp4";
 import tajamahal from "../../images/Tajmahal.jpg"
@@ -45,7 +46,9 @@ function Homepage({ setShowNavbarFooter }) {
             around the world.
           </p>
           <p>Already a User?</p>
-          <button type="button" className="btn btn-success">Sign in</button>
+          <Link to="/Login">
+            <button className="btn btn-success">Sign in</button>
+          </Link>
         </div>
       </div>
       {/* for blog guide adding cards */}
@@ -60,7 +63,9 @@ function Homepage({ setShowNavbarFooter }) {
             <div className="card-body">
               <h5 className="card-title">Taj Mahal</h5>
               <p> A Timeless Symbol of Love and Architecture</p>
-              <a href="#" className="btn btn-primary">Read more...</a>
+              <Link to="/Tajmahal">
+                <a className="btn btn-primary">Read more...</a>
+              </Link>
             </div>
           </div>
           <div className="card" style={{ width: "18rem" }}>
@@ -68,25 +73,29 @@ function Homepage({ setShowNavbarFooter }) {
             <div className="card-body">
               <h5 className="card-title">The Pyramids of Egypt</h5>
               <p>Unraveling the Mysteries of the Ancient World</p>
-              <a href="#" className="btn btn-primary">Read more...</a>
+              <Link to="/Egypt">
+                <a className="btn btn-primary">Read more...</a>
+              </Link>
             </div>
           </div>
           <div className="card" style={{ width: "18rem" }}>
             <img src={greatwall} className="card-img-top" alt="..." />
             <div className="card-body">
               <h5 className="card-title">The Great Wall of China</h5>
-              <p>A Monument of Strength and Legacy
-
-              </p>
-              <a href="#" className="btn btn-primary">Read more...</a>
-            </div>
+              <p>A Monument of Strength and Legacy</p>
+              <Link to="/Chinawall">
+                <button className="btn btn-primary">Read more...</button>
+              </Link>            
+           </div>
           </div>
           <div className="card" style={{ width: "18rem" }}>
             <img src={antartica} className="card-img-top" alt="..." />
             <div className="card-body">
               <h5 className="card-title">Antarctica</h5>
               <p>Exploring the Frozen Wilderness of the Earth</p>
-              <a href="#" className="btn btn-primary">Read more...</a>
+              <Link to="/Antartica">
+                <a className="btn btn-primary">Read more...</a>
+              </Link>
             </div>
           </div>
           <div className="card" style={{ width: "18rem" }}>
@@ -94,7 +103,9 @@ function Homepage({ setShowNavbarFooter }) {
             <div className="card-body">
               <h5 className="card-title">Mountain Lake Boating</h5>
               <p>A Serene Escape into Nature’s Beauty</p>
-              <a href="#" className="btn btn-primary">Read more...</a>
+              <Link to="/Boating">
+                <a className="btn btn-primary">Read more...</a>
+              </Link>
             </div>
           </div>
           <div className="card" style={{ width: "18rem" }}>
@@ -114,7 +125,9 @@ function Homepage({ setShowNavbarFooter }) {
             <div className="homepagesignup-contents">
               <h1>Start Your Journey: Become a Travel Blogger with Us</h1>
               <h4>Sign up to become a blogger and utilize our services...</h4>
-              <button type="button" className="btn btn-success">Sign-up now!</button>
+              <Link to="/signup">
+                <button className="btn btn-success">Sign up</button>
+              </Link>
               <p className="editp">See our privacy policy</p>
               <p>This site is protected by ReCAPTCHA and the Google Privacy Policy and Terms of Service apply.</p>
             </div>
@@ -126,8 +139,8 @@ function Homepage({ setShowNavbarFooter }) {
 
         {/* bill board */}
         <div className="board-heading">
-            <h1>Traveller's Blog-Vision</h1>
-          </div>
+          <h1>Traveller's Blog-Vision</h1>
+        </div>
         <div className="billboard-parent">
           <div className="board-edit">
             <img src={guide} alt="" />

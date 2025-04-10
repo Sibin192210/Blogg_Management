@@ -8,6 +8,11 @@ import Contact from './Components/Contact/Contact';
 import Navbar from './Components/Navbar/Navbar';
 import { useState } from 'react';
 import Footer from './Components/Footer/Footer';
+import Tajmahal from './Demo-stories/Tajmahal';
+import Egypt from './Demo-stories/Egypt';
+import Chinawall from './Demo-stories/Chinawall';
+import Antartica from './Demo-stories/Antartica';
+import Boating from './Demo-stories/Boating';
 
 function App() {
   const [isContactOpen, setIsContactOpen] = useState(false);
@@ -21,6 +26,11 @@ function App() {
         <Route path="/" element={<Homepage setShowNavbarFooter={setShowNavbarFooter} />} />
         <Route path="/Signup" element={<Signup setShowNavbarFooter={setShowNavbarFooter} />} />
         <Route path="/Login" element={<Login setShowNavbarFooter={setShowNavbarFooter} />} />
+        <Route path="/Tajmahal" element={<Tajmahal />} />
+        <Route path="/Egypt" element={<Egypt />} />
+        <Route path="/Chinawall" element={<Chinawall />} />
+        <Route path="/Antartica" element={<Antartica/>} />
+        <Route path="/Boating" element={<Boating/>} />
       </Routes>
 
       {showNavbarFooter && <Footer setIsContactOpen={setIsContactOpen} />}

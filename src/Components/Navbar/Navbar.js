@@ -1,20 +1,23 @@
 import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import logo from "../../images/logo.png";
 import "./Navbar.css";
 import { Link } from "react-router-dom";
 
 function Navbar({ setIsContactOpen }) {
-  console.log("Navbar received setIsContactOpen:", setIsContactOpen);
-
   const [navBackground, setNavBackground] = useState("transparent");
   const [isMobile, setIsMobile] = useState(window.innerWidth < 992);
 
+  const location = useLocation();
+  const solidPages = ["/Tajmahal","/Egypt","/Chinawall","/Antartica","/Boating"]; 
+  const isSolidPage = solidPages.includes(location.pathname);
+
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 50) {
+      if (isSolidPage) {
         setNavBackground("#184E47");
       } else {
-        setNavBackground("transparent");
+        setNavBackground(window.scrollY > 50 ? "#184E47" : "transparent");
       }
     };
 
@@ -22,6 +25,7 @@ function Navbar({ setIsContactOpen }) {
       setIsMobile(window.innerWidth < 992);
     };
 
+    handleScroll(); // set initial background
     window.addEventListener("scroll", handleScroll);
     window.addEventListener("resize", handleResize);
 
@@ -29,7 +33,7 @@ function Navbar({ setIsContactOpen }) {
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("resize", handleResize);
     };
-  }, []);
+  }, [isSolidPage]);
 
   return (
     <nav
