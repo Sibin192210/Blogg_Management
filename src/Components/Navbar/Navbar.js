@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 function Navbar({ setIsContactOpen }) {
   const [navBackground, setNavBackground] = useState("transparent");
   const [isMobile, setIsMobile] = useState(window.innerWidth < 992);
+  const [navsize, setnavsize] = useState("14px")
 
   const location = useLocation();
   const solidPages = ["/Tajmahal","/Egypt","/Chinawall","/Antartica","/Boating"]; 
@@ -16,7 +17,9 @@ function Navbar({ setIsContactOpen }) {
     const handleScroll = () => {
       if (window.scrollY > 50) {
         setNavBackground("#184E47");
+        setnavsize("4px")
       } else {
+        setnavsize("14px")
         setNavBackground("transparent");
       }
     };
@@ -37,11 +40,13 @@ function Navbar({ setIsContactOpen }) {
 
   return (
     <nav
-      className="navbar fixed-top navbar-expand-xxl p-3"
+      className="navbar fixed-top navbar-expand-xxl"
       style={{
         backgroundColor: navBackground,
-        transition: "background-color 0.8s cubic-bezier(0.4, 0, 0.2, 1)",
+        padding: navsize,
+        transition: "all 0.4s ease", // smoother resize + color change
       }}
+      
     >
       <div className="container-fluid">
         <Link className="navbar-brand" to="/">
@@ -72,7 +77,7 @@ function Navbar({ setIsContactOpen }) {
         >
           <ul className="navbar-nav">
             <li className="nav-item"><Link className="nav-link" to="/">Home</Link></li>
-            <li className="nav-item"><Link className="nav-link" to="/about">About Us</Link></li>
+            <li className="nav-item"><Link className="nav-link" to="/Aboutus">About Us</Link></li>
             <li className="nav-item"><Link className="nav-link" to="/add-blog">Add Blog</Link></li>
             <li className="nav-item">
               <Link className="nav-link" to="#" onClick={() => setIsContactOpen(true)}>Contact Us</Link>

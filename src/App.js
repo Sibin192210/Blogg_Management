@@ -13,6 +13,7 @@ import Egypt from './Demo-stories/Egypt';
 import Chinawall from './Demo-stories/Chinawall';
 import Antartica from './Demo-stories/Antartica';
 import Boating from './Demo-stories/Boating';
+import Aboutus from './Components/AboutUs/Aboutus';
 
 function App() {
   const [isContactOpen, setIsContactOpen] = useState(false);
@@ -30,7 +31,8 @@ function App() {
         <Route path="/Egypt" element={<Egypt />} />
         <Route path="/Chinawall" element={<Chinawall />} />
         <Route path="/Antartica" element={<Antartica/>} />
-        <Route path="/Boating" element={<Boating/>} />
+        <Route path="/Boating" element={<Boating />} />
+        <Route path="/Aboutus" element={<Aboutus />} />        
       </Routes>
 
       {showNavbarFooter && <Footer setIsContactOpen={setIsContactOpen} />}
