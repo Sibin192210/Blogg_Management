@@ -116,6 +116,16 @@ function Homepage({ setShowNavbarFooter }) {
               <a href="#" className="btn btn-primary">Read more...</a>
             </div>
           </div>
+          <div className="card" style={{ width: "18rem" }}>
+            <img src={boating} className="card-img-top" alt="image not found" />
+            <div className="card-body">
+              <h5 className="card-title">Mountain Lake Boating</h5>
+              <p>A Serene Escape into Nature’s Beauty</p>
+              <Link to="/Boating">
+                <a className="btn btn-primary">Read more...</a>
+              </Link>
+            </div>
+          </div>
 
         </div>
 
