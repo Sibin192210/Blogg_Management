@@ -13,12 +13,12 @@ function Signup({setShowNavbarFooter}) {
       <div className='loginpage'>
 
         <div id='logintext' className='mb-5'>Sign Up</div>
-        <span>username</span>
+        <span>Email</span>
         <div className="input-group mb-4">
           <svg className='mt-2 mr-3' id="i-user" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="25" height="25" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
             <path d="M22 11 C22 16 19 20 16 20 13 20 10 16 10 11 10 6 12 3 16 3 20 3 22 6 22 11 Z M4 30 L28 30 C28 21 22 20 16 20 10 20 4 21 4 30 Z" />
           </svg>
-          <input type="text" className="form-control" placeholder="Type your username" aria-label="Username"  />
+          <input type="text" className="form-control" placeholder="Type your email" aria-label="Username"  />
         </div>
 
         <div>

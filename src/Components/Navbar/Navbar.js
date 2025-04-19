@@ -89,7 +89,7 @@ function Navbar({ setIsContactOpen }) {
               <ul className="dropdown-menu">
                 <li><Link className="dropdown-item" to="/login">Login</Link></li>
                 <li><Link className="dropdown-item" to="/signup">Sign up</Link></li>
-                <li><Link className="dropdown-item" to="/admin-login">Admin Login</Link></li>
+                <li><Link className="dropdown-item" to="/Adminlogin">Admin Login</Link></li>
               </ul>
             </li>
           </ul>
