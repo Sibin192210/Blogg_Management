@@ -14,6 +14,9 @@ import Chinawall from './Demo-stories/Chinawall';
 import Antartica from './Demo-stories/Antartica';
 import Boating from './Demo-stories/Boating';
 import Aboutus from './Components/AboutUs/Aboutus';
+import Forgetpass from './Components/User/Forgetpass';
+import Adminlogin from './Components/Admin/Adminlogin';
+import Addblog from './AddBlog/Addblog';
 
 function App() {
   const [isContactOpen, setIsContactOpen] = useState(false);
@@ -32,7 +35,10 @@ function App() {
         <Route path="/Chinawall" element={<Chinawall />} />
         <Route path="/Antartica" element={<Antartica/>} />
         <Route path="/Boating" element={<Boating />} />
-        <Route path="/Aboutus" element={<Aboutus />} />        
+        <Route path="/Aboutus" element={<Aboutus />} />  
+        <Route path='/Addblog' element={<Addblog />} />      
+        <Route path="/Forgetpass" element={<Forgetpass setShowNavbarFooter={setShowNavbarFooter} />} />        
+        <Route path="/Adminlogin" element={<Adminlogin setShowNavbarFooter={setShowNavbarFooter} />} />        
       </Routes>
 
       {showNavbarFooter && <Footer setIsContactOpen={setIsContactOpen} />}

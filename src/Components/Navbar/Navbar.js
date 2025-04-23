@@ -10,41 +10,44 @@ function Navbar({ setIsContactOpen }) {
   const [navsize, setnavsize] = useState("14px")
 
   const location = useLocation();
-  const solidPages = ["/Tajmahal","/Egypt","/Chinawall","/Antartica","/Boating"]; 
+  const solidPages = ["/Tajmahal","/Egypt","/Chinawall","/Antartica","/Boating","/Addblog"]; 
   const isSolidPage = solidPages.includes(location.pathname);
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 50) {
+      if (window.scrollY > 50 || isSolidPage) {
         setNavBackground("#184E47");
-        setnavsize("4px")
+        setnavsize("4px");
       } else {
-        setnavsize("14px")
         setNavBackground("transparent");
+        setnavsize("14px");
       }
     };
-
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 992);
-    };
-
-    handleScroll(); // set initial background
+  
+    // Set initial background based on route without waiting for scroll
+    if (isSolidPage) {
+      setNavBackground("#184E47");
+      setnavsize("4px");
+    } else {
+      handleScroll();
+    }
+  
     window.addEventListener("scroll", handleScroll);
-    window.addEventListener("resize", handleResize);
-
+    window.addEventListener("resize", () => setIsMobile(window.innerWidth < 992));
+  
     return () => {
       window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("resize", () => setIsMobile(window.innerWidth < 992));
     };
   }, [isSolidPage]);
-
+  
   return (
     <nav
       className="navbar fixed-top navbar-expand-xxl"
       style={{
         backgroundColor: navBackground,
         padding: navsize,
-        transition: "all 0.4s ease", // smoother resize + color change
+        transition: "all 0.4s ease", 
       }}
       
     >
@@ -78,7 +81,7 @@ function Navbar({ setIsContactOpen }) {
           <ul className="navbar-nav">
             <li className="nav-item"><Link className="nav-link" to="/">Home</Link></li>
             <li className="nav-item"><Link className="nav-link" to="/Aboutus">About Us</Link></li>
-            <li className="nav-item"><Link className="nav-link" to="/add-blog">Add Blog</Link></li>
+            <li className="nav-item"><Link className="nav-link" to="/Addblog">Add Blog</Link></li>
             <li className="nav-item">
               <Link className="nav-link" to="#" onClick={() => setIsContactOpen(true)}>Contact Us</Link>
             </li>
@@ -89,7 +92,7 @@ function Navbar({ setIsContactOpen }) {
               <ul className="dropdown-menu">
                 <li><Link className="dropdown-item" to="/login">Login</Link></li>
                 <li><Link className="dropdown-item" to="/signup">Sign up</Link></li>
-                <li><Link className="dropdown-item" to="/admin-login">Admin Login</Link></li>
+                <li><Link className="dropdown-item" to="/Adminlogin">Admin Login</Link></li>
               </ul>
             </li>
           </ul>

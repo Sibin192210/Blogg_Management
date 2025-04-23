@@ -1,0 +1,62 @@
+.forgetpass-page {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to right, #74ebd5, #ACB6E5);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .forgetpass-page .forgetpass-container {
+    width: 100%;
+    max-width: 400px;
+    background-color: #ffffff;
+    padding: 30px 25px;
+    border-radius: 16px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  }
+  
+  .forgetpass-page .forgetpass-container h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 25px;
+  }
+  
+  .forgetpass-page .forgetpass-container input {
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+  }
+  
+  .forgetpass-page .forgetpass-container input:focus {
+    border-color: #74ebd5;
+    outline: none;
+  }
+  
+  .forgetpass-page .forgetpass-container button {
+    width: 100%;
+    padding: 12px;
+    background-color: #74ebd5;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-bottom: 10px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .forgetpass-page .forgetpass-container button:hover {
+    background-color: #5fc7bb;
+  }
+  
+  /* Disable button */
+  .forgetpass-page .forgetpass-container button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
