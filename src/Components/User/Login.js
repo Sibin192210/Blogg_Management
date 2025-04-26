@@ -1,56 +1,111 @@
-import { useEffect } from 'react'
-import './Login.css'
-import { Link } from 'react-router-dom'
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import "./Login.css";
+
 function Login({ setShowNavbarFooter }) {
+  const navigate = useNavigate();
+
   useEffect(() => {
-    setShowNavbarFooter(false); // Hide Navbar & Footer on Login Page
-    return () => setShowNavbarFooter(true); // Show them again when leaving
+    setShowNavbarFooter(false);
+    return () => setShowNavbarFooter(true);
   }, [setShowNavbarFooter]);
+
+  const [data, setData] = useState({ email: "", password: "" });
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [loginMessage, setLoginMessage] = useState("");
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setData((prevData) => ({ ...prevData, [name]: value }));
+    setEmailError("");
+    setPasswordError("");
+    setLoginMessage("");
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    axios
+      .post("http://localhost:3003/loginDetails", data)
+      .then((res) => {
+        if (!res.data.success) {
+          setEmailError("Invalid email");
+        } else if (res.data.data.password !== data.password) {
+          setPasswordError("Incorrect password");
+        } else {
+          setLoginMessage("Login Success");
+          setTimeout(() => navigate("/"), 3000);
+        }
+      })
+      .catch((err) => {
+        console.error("Login error:", err);
+      });
+  };
+
   return (
-    <div className='loginbg'>
+    <div className="loginbg">
+      <form className="loginpage" onSubmit={handleSubmit}>
+        <div id="logintext" className="mb-5">
+          Login
+        </div>
 
-      <div className='loginpage'>
-
-        <div id='logintext' className='mb-5'>Login</div>
         <span>Email</span>
-        <div className="input-group mb-4">
-          <svg className='mt-2 mr-3' id="i-user" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="25" height="25" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
-            <path d="M22 11 C22 16 19 20 16 20 13 20 10 16 10 11 10 6 12 3 16 3 20 3 22 6 22 11 Z M4 30 L28 30 C28 21 22 20 16 20 10 20 4 21 4 30 Z" />
-          </svg>
-          <input type="text" className="form-control" placeholder="Type your email" aria-label="Username"  />
+        <div className="input-group mb-1">
+          <input
+            type="email"
+            className="form-control"
+            placeholder="Type your email"
+            name="email"
+            value={data.email}
+            onChange={handleChange}
+          />
+        </div>
+        {emailError && <div className="text-danger mb-2">{emailError}</div>}
+
+        <span>Password</span>
+        <div className="input-group mb-1">
+          <input
+            type="password"
+            className="form-control"
+            placeholder="Enter Password"
+            name="password"
+            value={data.password}
+            onChange={handleChange}
+          />
+        </div>
+        {passwordError && (
+          <div className="text-danger mb-2">{passwordError}</div>
+        )}
+
+        <p className="text-center">
+          <Link to="/Forgetpass" className="text-black">
+            Forgot password
+          </Link>
+        </p>
+
+        <div className="d-grid">
+          <button className="btn btn-primary" type="submit">
+            Login
+          </button>
         </div>
 
-        <div>
-          <span>password</span>
-          <div className="input-group mb-4">
-            <svg className='mt-2' id="i-lock" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="25" height="25" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
-              <path d="M5 15 L5 30 27 30 27 15 Z M9 15 C9 9 9 5 16 5 23 5 23 9 23 15 M16 20 L16 23" />
-              <circle cx="16" cy="24" r="1" />
-            </svg>
-            <input type="password" className="form-control" placeholder="Enter Password" aria-label="Username" />
+        {loginMessage && (
+          <div className="login-success">
+            ✅ {loginMessage} – Redirecting...
           </div>
-        </div>
-
-        <p className="text-center"><Link to="/Forgetpass" class="text-black fw-semibold link-body-emphasis link-offset-2 link-underline-opacity-0 link-underline-opacity-0-hover">Forgot password</Link></p>
-
-        <div class="d-grid">
-          <button class="btn" type="button">Login</button>
-        </div>
-
-        <div className="text-center">
-          <p>
-            Don't have an account?
-          </p>
-        </div>
+        )}
 
         <div className="text-center mt-3">
-          <p><Link to='/Signup' class="text-black fw-semibold link-body-emphasis link-offset-2 link-underline-opacity-0 link-underline-opacity-0-hover">Sign up</Link></p>
+          <p>Don't have an account?</p>
+          <Link to="/Signup" className="text-black">
+            Sign up
+          </Link>
         </div>
-
-      </div>
+      </form>
     </div>
-
-  )
+  );
 }
 
-export default Login
+export default Login;

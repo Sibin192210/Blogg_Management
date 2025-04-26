@@ -22,14 +22,28 @@ function Forgetpass({ setShowNavbarFooter }) {
     return Math.floor(100000 + Math.random() * 900000).toString();
   };
 
-  const handleSendOtp = () => {
-    if (email) {
+  const handleSendOtp = async () => {
+    if (!email) return alert("Please enter your email");
+
+    try {
+      const res = await fetch("http://localhost:3003/checkEmail", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await res.json();
+
+      if (!data.success) return alert("Invalid email address");
+
       const otp = generateRandomOtp();
       setGeneratedOtp(otp);
       setOtpSent(true);
+
+      // In real application, use an email service to send OTP
       alert("OTP sent to your email: " + otp);
-    } else {
-      alert("Please enter your email");
+    } catch (err) {
+      alert("Server error");
     }
   };
 
@@ -37,17 +51,31 @@ function Forgetpass({ setShowNavbarFooter }) {
     if (enteredOtp === generatedOtp) {
       setIsOtpVerified(true);
     } else {
-      alert("Incorrect OTP");
+      alert("Invalid OTP. Please try again.");
     }
   };
 
-  const handleResetPassword = () => {
-    if (newPassword !== confirmPassword) {
-      alert("Passwords do not match");
-    } else if (!newPassword || !confirmPassword) {
-      alert("Please fill in both password fields");
-    } else {
-      navigate("/Homepage");
+  const handleResetPassword = async () => {
+    if (!newPassword || !confirmPassword) return alert("Please fill all fields");
+    if (newPassword !== confirmPassword) return alert("Passwords do not match");
+
+    try {
+      const res = await fetch("http://localhost:3003/updatePassword", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password: newPassword }),
+      });
+
+      const data = await res.json();
+
+      if (data.success) {
+        alert("Password updated successfully. Please login.");
+        navigate("/Login");
+      } else {
+        alert(data.msg);
+      }
+    } catch (err) {
+      alert("Failed to update password");
     }
   };
 
@@ -55,7 +83,8 @@ function Forgetpass({ setShowNavbarFooter }) {
     <div className="forgetpass-page">
       <div className="forgetpass-container">
         <h2>Forgot Password</h2>
-  
+
+        {/* Email Input */}
         <input
           type="email"
           placeholder="Enter your email"
@@ -64,8 +93,8 @@ function Forgetpass({ setShowNavbarFooter }) {
           disabled={otpSent}
         />
         {!otpSent && <button onClick={handleSendOtp}>Send OTP</button>}
-  
-        {/* OTP */}
+
+        {/* OTP Input */}
         {otpSent && !isOtpVerified && (
           <>
             <input
@@ -77,7 +106,8 @@ function Forgetpass({ setShowNavbarFooter }) {
             <button onClick={handleVerifyOtp}>Verify OTP</button>
           </>
         )}
-  
+
+        {/* Password Reset */}
         {isOtpVerified && (
           <>
             <input
@@ -92,14 +122,12 @@ function Forgetpass({ setShowNavbarFooter }) {
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
-            <button onClick={handleResetPassword}>Login</button>
+            <button onClick={handleResetPassword}>Update Password</button>
           </>
         )}
       </div>
     </div>
   );
-  
-  
 }
 
 export default Forgetpass;
