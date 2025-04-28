@@ -14,14 +14,17 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(93, 98, 88, 0.7);
+  background-color: rgba(58, 79, 64, 0.7);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 100;
   margin-top: 50px;
 }
-
+.popupoverlay h2{
+  font-weight: bold;
+  font-family: 'Times New Roman', serif;
+}
 .blog-input-contents {
   background: #ffffff;
   padding: 2rem;
@@ -53,6 +56,8 @@
 
 .form-edit label {
   font-weight: 600;
+  font-family: serif;
+  font-size: 20px;
   color: #333;
 }
 
@@ -63,12 +68,13 @@
 
 .form-edit button[type="submit"] {
   padding: 0.8rem;
-  background-color: #3f51b5;
+  background-color: #066517;
   color: white;
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  font-size: 1rem;
+  font-size: 20px;
+  font-weight: bolder;
   margin-top: 1rem;
 }
 
@@ -93,7 +99,37 @@
 .close-btn:hover {
   color: #333;
   background-color: #f0f0f0;
+  
 }
+.close-icon{
+  font-size: 200rem;
+}
+.close-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: transparent;
+  border: none;
+  font-size: 1.5rem; /* You can increase this to make the button larger */
+  cursor: pointer;
+  color: #666;
+  transition: color 0.3s;
+  width: 50px; /* Increase width for better alignment */
+  height: 50px; /* Increase height for better alignment */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.close-btn:hover {
+  color: #c71f1f;
+}
+
+.close-icon {
+  font-size: 2rem; 
+}
+
 
 .blog-card-container {
   display: flex;
@@ -101,6 +137,7 @@
   justify-content: center;
   padding: 2rem;
   gap: 1rem;
+  margin-top: 25px;
 }
 
 .card {
@@ -141,6 +178,8 @@
   margin: 2rem auto;
   display: block;
   transition: background-color 0.3s;
+  font-weight: bolder;
+  font-family: sans-serif;
 }
 
 .open-form-btn:hover {

@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import axios from 'axios'; // important import
 import { Link } from 'react-router-dom';
+import { MdOutlineClose } from "react-icons/md";
 import './Addblog.css';
 
 const Addblog = () => {
@@ -25,22 +27,52 @@ const Addblog = () => {
     story4a: ''
   });
 
+  const [selectedFiles, setSelectedFiles] = useState({});
+
   const handleChange = (e) => {
     const { id, value, type, files } = e.target;
-
     if (type === 'file') {
-      const fileURL = files[0] ? URL.createObjectURL(files[0]) : '';
-      setFormData(prev => ({ ...prev, [id]: fileURL }));
+      setSelectedFiles(prev => ({ ...prev, [id]: files[0] }));
     } else {
       setFormData(prev => ({ ...prev, [id]: value }));
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setBlogs(prev => [...prev, formData]);
-    resetForm();
-    setShowForm(false);
+
+    const blogData = new FormData();
+    Object.keys(formData).forEach(key => {
+      blogData.append(key, formData[key]);
+    });
+
+    Object.keys(selectedFiles).forEach(key => {
+      blogData.append(key, selectedFiles[key]);
+    });
+
+    try {
+      const response = await axios.post('http://localhost:3003/addBlogDetails', blogData, {
+        headers: { 'Content-Type': 'multipart/form-data' }
+      });
+
+      if (response.data.msg === 'Blog created successfully') {
+        alert('Blog posted successfully');
+        setBlogs(prev => [
+          ...prev,
+          {
+            ...formData,
+            thumbnailimage: response.data.thumbnailPath  // Assuming server returns the image URL
+          }
+        ]);
+        resetForm();
+        setShowForm(true);  // Show the form again for new blog
+      } else {
+        alert('Something went wrong');
+      }
+    } catch (error) {
+      console.error('Error submitting blog:', error);
+      alert('Server error');
+    }
   };
 
   const resetForm = () => {
@@ -63,6 +95,7 @@ const Addblog = () => {
       story4: '',
       story4a: ''
     });
+    setSelectedFiles({});
     document.querySelectorAll('input[type="file"]').forEach(input => input.value = '');
   };
 
@@ -100,61 +133,56 @@ const Addblog = () => {
         </button>
       )}
 
-      {/* Form with Overlay */}
+      {/* Form */}
       {showForm && (
         <div className='Add-blog-parent'>
           <div className='popupoverlay'>
             <div className='blog-input-contents'>
               <button className="close-btn" onClick={handleCloseForm} aria-label="Close form">
-                &times;
+                <MdOutlineClose className="close-icon" />
               </button>
-              <h2 style={{ textAlign: 'center', marginBottom: '1.5rem' }}>Create New Blog Post</h2>
+              <h2>Create New Blog Post</h2>
               <form className='form-edit' onSubmit={handleSubmit}>
-                {/* Heading and Author */}
-                <label htmlFor="mainheading">Enter your Blog name</label>
-                <input type="text" id="mainheading" placeholder="Enter the main heading" required value={formData.mainheading} onChange={handleChange} />
+                <label>Main Heading</label>
+                <input type="text" id="mainheading" value={formData.mainheading} onChange={handleChange} required />
 
-                <label htmlFor="authorname">Enter the author name</label>
-                <input type="text" id="authorname" placeholder="Enter the author name" required value={formData.authorname} onChange={handleChange} />
+                <label>Author Name</label>
+                <input type="text" id="authorname" value={formData.authorname} onChange={handleChange} required />
 
-                {/* Thumbnail Image */}
-                <label htmlFor="thumbnailimage">Insert the Thumbnail image</label>
-                <input type="file" id="thumbnailimage" accept="image/*" required onChange={handleChange} />
+                <label>Thumbnail Image</label>
+                <input type="file" id="thumbnailimage" accept="image/*" onChange={handleChange} required />
 
-                {/* Content Section 1 */}
-                <label htmlFor="subheading1">Enter the sub heading-1</label>
-                <input type="text" id="subheading1" placeholder="Enter sub heading-1" required value={formData.subheading1} onChange={handleChange} />
+                <label>Sub Heading 1</label>
+                <input type="text" id="subheading1" value={formData.subheading1} onChange={handleChange} required />
 
-                <label htmlFor="introduction">Enter content-1</label>
-                <textarea id="introduction" placeholder="Enter the Introduction about blog" required value={formData.introduction} onChange={handleChange}></textarea>
+                <label>Introduction</label>
+                <textarea id="introduction" value={formData.introduction} onChange={handleChange} required></textarea>
 
-                {/* Content Section 2 */}
-                <label htmlFor="subheading2">Sub-heading-2</label>
-                <input type="text" id="subheading2" placeholder="Enter sub heading-2" required value={formData.subheading2} onChange={handleChange} />
+                <label>Sub Heading 2</label>
+                <input type="text" id="subheading2" value={formData.subheading2} onChange={handleChange} required />
 
-                <label htmlFor="story2">Enter the content-2</label>
-                <textarea id="story2" placeholder="Enter the story continuation" required value={formData.story2} onChange={handleChange}></textarea>
-                <textarea id="story2a" placeholder="Enter the story continuation" value={formData.story2a} onChange={handleChange}></textarea>
+                <label>Story 2</label>
+                <textarea id="story2" value={formData.story2} onChange={handleChange} required></textarea>
+                <textarea id="story2a" value={formData.story2a} onChange={handleChange}></textarea>
 
-                {/* Carousel Images */}
-                <label>Insert three best pics from your travel</label>
+                <label>Carousel Images</label>
                 <input type="file" id="corosal1" accept="image/*" onChange={handleChange} />
                 <input type="file" id="corosal2" accept="image/*" onChange={handleChange} />
                 <input type="file" id="corosal3" accept="image/*" onChange={handleChange} />
 
-                {/* Content Section 3 */}
-                <label htmlFor="subheading3">Sub heading-3</label>
-                <input type="text" id="subheading3" placeholder="Enter sub-heading 3" required value={formData.subheading3} onChange={handleChange} />
+                <label>Sub Heading 3</label>
+                <input type="text" id="subheading3" value={formData.subheading3} onChange={handleChange} required />
 
-                <textarea id="story3" placeholder="Enter your story" required value={formData.story3} onChange={handleChange}></textarea>
-                <textarea id="story3a" placeholder="Enter your story" value={formData.story3a} onChange={handleChange}></textarea>
+                <label>Story 3</label>
+                <textarea id="story3" value={formData.story3} onChange={handleChange} required></textarea>
+                <textarea id="story3a" value={formData.story3a} onChange={handleChange}></textarea>
 
-                {/* Content Section 4 */}
-                <label htmlFor="subheading4">Sub heading-4</label>
-                <input type="text" id="subheading4" placeholder="Enter sub-heading 4" required value={formData.subheading4} onChange={handleChange} />
+                <label>Sub Heading 4</label>
+                <input type="text" id="subheading4" value={formData.subheading4} onChange={handleChange} required />
 
-                <textarea id="story4" placeholder="Enter your story" required value={formData.story4} onChange={handleChange}></textarea>
-                <textarea id="story4a" placeholder="Enter your story" value={formData.story4a} onChange={handleChange}></textarea>
+                <label>Story 4</label>
+                <textarea id="story4" value={formData.story4} onChange={handleChange} required></textarea>
+                <textarea id="story4a" value={formData.story4a} onChange={handleChange}></textarea>
 
                 <button type="submit">Publish Blog</button>
               </form>
