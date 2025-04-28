@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Addblog.css';
+import { MdOutlineClose } from "react-icons/md";
 
 const Addblog = () => {
   const [blogs, setBlogs] = useState([]);
-  const [showForm, setShowForm] = useState(true);
+  const [showForm, setShowForm] = useState(true);// for testing set to true
   const [formData, setFormData] = useState({
     mainheading: '',
     authorname: '',
@@ -106,7 +107,7 @@ const Addblog = () => {
           <div className='popupoverlay'>
             <div className='blog-input-contents'>
               <button className="close-btn" onClick={handleCloseForm} aria-label="Close form">
-                &times;
+              <MdOutlineClose  className="close-icon" />
               </button>
               <h2 style={{ textAlign: 'center', marginBottom: '1.5rem' }}>Create New Blog Post</h2>
               <form className='form-edit' onSubmit={handleSubmit}>
