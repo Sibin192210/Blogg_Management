@@ -14,6 +14,8 @@ import guide from "../../images/tour-guide.png"
 import camera from "../../images/camera-kid.png"
 import writer from "../../images/writing.png"
 
+
+
 function Homepage({ setShowNavbarFooter }) {
   useEffect(() => {
     setShowNavbarFooter(true);
@@ -85,8 +87,8 @@ function Homepage({ setShowNavbarFooter }) {
               <p>A Monument of Strength and Legacy</p>
               <Link to="/Chinawall">
                 <button className="btn btn-primary">Read more...</button>
-              </Link>            
-           </div>
+              </Link>
+            </div>
           </div>
           <div className="card" style={{ width: "18rem" }}>
             <img src={antartica} className="card-img-top" alt="..." />
@@ -127,6 +129,12 @@ function Homepage({ setShowNavbarFooter }) {
             </div>
           </div>
 
+
+        </div>
+        <div className="viewAllblogbutton">
+          <button>
+            view all blog
+          </button>
         </div>
 
         {/* Homepage Signup */}
@@ -163,7 +171,10 @@ function Homepage({ setShowNavbarFooter }) {
             <p>"Embrace the journey, snap memories, freeze emotions, and relive every breathtaking moment through your lens."</p>
           </div>
           <div className="board-edit">
+
+
             <img src={writer} alt="" />
+
             <h2>Write With Us</h2>
             <p>"Share your stories, inspire travelers, and become part of our global journey through words."
 

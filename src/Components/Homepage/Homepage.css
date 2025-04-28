@@ -615,4 +615,34 @@
     font-size: 14px;
   }
 }
+.viewAllblogbutton {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  text-align: center; /* Centering the button */
+}
+
+.viewAllblogbutton button {
+  border-radius: 10px;
+  padding: 12px 24px;
+  color: white;
+  background-color: #0f9633;
+  font-weight: bold;
+  font-size: 18px;
+  border: none;
+  cursor: pointer;
+  width: 500px;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+/* Corrected hover effect */
+.viewAllblogbutton button:hover {
+  transform: scale(1.05) rotate(-2deg);
+  background-color: #088875;
+}
+
+/* Optional: Add a little shadow on hover */
+.viewAllblogbutton button:active {
+  transform: scale(0.95);
+}
+
 
