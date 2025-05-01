@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios'; // important import
+import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { MdOutlineClose } from "react-icons/md";
 import './Addblog.css';
@@ -7,18 +7,15 @@ import './Addblog.css';
 const Addblog = () => {
   const [blogs, setBlogs] = useState([]);
   const [showForm, setShowForm] = useState(true);
+
   const [formData, setFormData] = useState({
     mainheading: '',
     authorname: '',
-    thumbnailimage: '',
     subheading1: '',
     introduction: '',
     subheading2: '',
     story2: '',
     story2a: '',
-    corosal1: '',
-    corosal2: '',
-    corosal3: '',
     subheading3: '',
     story3: '',
     story3a: '',
@@ -27,7 +24,12 @@ const Addblog = () => {
     story4a: ''
   });
 
-  const [selectedFiles, setSelectedFiles] = useState({});
+  const [selectedFiles, setSelectedFiles] = useState({
+    thumbnailimage: null,
+    corosal1: null,
+    corosal2: null,
+    corosal3: null
+  });
 
   const handleChange = (e) => {
     const { id, value, type, files } = e.target;
@@ -42,12 +44,9 @@ const Addblog = () => {
     e.preventDefault();
 
     const blogData = new FormData();
-    Object.keys(formData).forEach(key => {
-      blogData.append(key, formData[key]);
-    });
-
-    Object.keys(selectedFiles).forEach(key => {
-      blogData.append(key, selectedFiles[key]);
+    Object.entries(formData).forEach(([key, val]) => blogData.append(key, val));
+    Object.entries(selectedFiles).forEach(([key, file]) => {
+      if (file) blogData.append(key, file);
     });
 
     try {
@@ -55,22 +54,21 @@ const Addblog = () => {
         headers: { 'Content-Type': 'multipart/form-data' }
       });
 
-      if (response.data.msg === 'Blog created successfully') {
+      if (response.data.msg === 'Blog saved successfully') {
         alert('Blog posted successfully');
         setBlogs(prev => [
           ...prev,
           {
             ...formData,
-            thumbnailimage: response.data.thumbnailPath  // Assuming server returns the image URL
+            thumbnailimage: `/Blogimages/${response.data.data.thumbnailimage}`
           }
         ]);
         resetForm();
-        setShowForm(true);  // Show the form again for new blog
       } else {
         alert('Something went wrong');
       }
-    } catch (error) {
-      console.error('Error submitting blog:', error);
+    } catch (err) {
+      console.error('Error submitting blog:', err);
       alert('Server error');
     }
   };
@@ -79,15 +77,11 @@ const Addblog = () => {
     setFormData({
       mainheading: '',
       authorname: '',
-      thumbnailimage: '',
       subheading1: '',
       introduction: '',
       subheading2: '',
       story2: '',
       story2a: '',
-      corosal1: '',
-      corosal2: '',
-      corosal3: '',
       subheading3: '',
       story3: '',
       story3a: '',
@@ -95,7 +89,12 @@ const Addblog = () => {
       story4: '',
       story4a: ''
     });
-    setSelectedFiles({});
+    setSelectedFiles({
+      thumbnailimage: null,
+      corosal1: null,
+      corosal2: null,
+      corosal3: null
+    });
     document.querySelectorAll('input[type="file"]').forEach(input => input.value = '');
   };
 
@@ -106,43 +105,34 @@ const Addblog = () => {
 
   return (
     <div>
-      {/* Blog Cards Display */}
       {blogs.length > 0 && (
         <div className="blog-card-container">
-          {blogs.map((blog, index) => (
-            <div key={index} className="card">
+          {blogs.map((blog, idx) => (
+            <div key={idx} className="card">
               {blog.thumbnailimage && (
                 <img src={blog.thumbnailimage} className="card-img-top" alt="Thumbnail" />
               )}
               <div className="card-body">
                 <h5 className="card-title">{blog.mainheading}</h5>
-                <p>{blog.subheading1 || (blog.introduction && blog.introduction.slice(0, 60) + '...')}</p>
-                <Link to={`/blog/${index}`} className="btn btn-primary">
-                  Read more...
-                </Link>
+                <p>{blog.subheading1 || blog.introduction?.slice(0, 60) + '...'}</p>
+                <Link to={`/blog/${idx}`} className="btn btn-primary">Read more...</Link>
               </div>
             </div>
           ))}
         </div>
       )}
 
-      {/* Button to open form */}
       {!showForm && (
-        <button className="open-form-btn" onClick={() => setShowForm(true)}>
-          Create New Blog
-        </button>
+        <button className="open-form-btn" onClick={() => setShowForm(true)}>Create New Blog</button>
       )}
 
-      {/* Form */}
       {showForm && (
-        <div className='Add-blog-parent'>
-          <div className='popupoverlay'>
-            <div className='blog-input-contents'>
-              <button className="close-btn" onClick={handleCloseForm} aria-label="Close form">
-                <MdOutlineClose className="close-icon" />
-              </button>
+        <div className="Add-blog-parent">
+          <div className="popupoverlay">
+            <div className="blog-input-contents">
+              <button className="close-btn" onClick={handleCloseForm}><MdOutlineClose /></button>
               <h2>Create New Blog Post</h2>
-              <form className='form-edit' onSubmit={handleSubmit}>
+              <form className="form-edit" onSubmit={handleSubmit}>
                 <label>Main Heading</label>
                 <input type="text" id="mainheading" value={formData.mainheading} onChange={handleChange} required />
 
@@ -152,37 +142,37 @@ const Addblog = () => {
                 <label>Thumbnail Image</label>
                 <input type="file" id="thumbnailimage" accept="image/*" onChange={handleChange} required />
 
-                <label>Sub Heading 1</label>
+                <label>Subheading 1</label>
                 <input type="text" id="subheading1" value={formData.subheading1} onChange={handleChange} required />
 
                 <label>Introduction</label>
-                <textarea id="introduction" value={formData.introduction} onChange={handleChange} required></textarea>
+                <textarea id="introduction" value={formData.introduction} onChange={handleChange} required />
 
-                <label>Sub Heading 2</label>
+                <label>Subheading 2</label>
                 <input type="text" id="subheading2" value={formData.subheading2} onChange={handleChange} required />
 
                 <label>Story 2</label>
-                <textarea id="story2" value={formData.story2} onChange={handleChange} required></textarea>
-                <textarea id="story2a" value={formData.story2a} onChange={handleChange}></textarea>
+                <textarea id="story2" value={formData.story2} onChange={handleChange} required />
+                <textarea id="story2a" value={formData.story2a} onChange={handleChange} />
 
                 <label>Carousel Images</label>
                 <input type="file" id="corosal1" accept="image/*" onChange={handleChange} />
                 <input type="file" id="corosal2" accept="image/*" onChange={handleChange} />
                 <input type="file" id="corosal3" accept="image/*" onChange={handleChange} />
 
-                <label>Sub Heading 3</label>
+                <label>Subheading 3</label>
                 <input type="text" id="subheading3" value={formData.subheading3} onChange={handleChange} required />
 
                 <label>Story 3</label>
-                <textarea id="story3" value={formData.story3} onChange={handleChange} required></textarea>
-                <textarea id="story3a" value={formData.story3a} onChange={handleChange}></textarea>
+                <textarea id="story3" value={formData.story3} onChange={handleChange} required />
+                <textarea id="story3a" value={formData.story3a} onChange={handleChange} />
 
-                <label>Sub Heading 4</label>
+                <label>Subheading 4</label>
                 <input type="text" id="subheading4" value={formData.subheading4} onChange={handleChange} required />
 
                 <label>Story 4</label>
-                <textarea id="story4" value={formData.story4} onChange={handleChange} required></textarea>
-                <textarea id="story4a" value={formData.story4a} onChange={handleChange}></textarea>
+                <textarea id="story4" value={formData.story4} onChange={handleChange} required />
+                <textarea id="story4a" value={formData.story4a} onChange={handleChange} />
 
                 <button type="submit">Publish Blog</button>
               </form>
