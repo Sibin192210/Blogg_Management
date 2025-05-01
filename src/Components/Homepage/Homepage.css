@@ -1,3 +1,6 @@
+*{
+  scroll-behavior: smooth;
+}
 .videocontent {
   position: relative;
   width: 100%;
@@ -521,6 +524,8 @@
   gap: 20px;
   flex-wrap: wrap; 
   justify-content: center;
+  background: linear-gradient(to left, rgb(52, 49, 64), #0d6258);
+
 }
 
 .board-edit {

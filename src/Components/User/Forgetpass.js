@@ -40,7 +40,6 @@ function Forgetpass({ setShowNavbarFooter }) {
       setGeneratedOtp(otp);
       setOtpSent(true);
 
-      // In real application, use an email service to send OTP
       alert("OTP sent to your email: " + otp);
     } catch (err) {
       alert("Server error");
@@ -84,7 +83,6 @@ function Forgetpass({ setShowNavbarFooter }) {
       <div className="forgetpass-container">
         <h2>Forgot Password</h2>
 
-        {/* Email Input */}
         <input
           type="email"
           placeholder="Enter your email"
@@ -94,7 +92,6 @@ function Forgetpass({ setShowNavbarFooter }) {
         />
         {!otpSent && <button onClick={handleSendOtp}>Send OTP</button>}
 
-        {/* OTP Input */}
         {otpSent && !isOtpVerified && (
           <>
             <input
@@ -107,7 +104,6 @@ function Forgetpass({ setShowNavbarFooter }) {
           </>
         )}
 
-        {/* Password Reset */}
         {isOtpVerified && (
           <>
             <input
