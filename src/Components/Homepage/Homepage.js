@@ -132,9 +132,11 @@ function Homepage({ setShowNavbarFooter }) {
 
         </div>
         <div className="viewAllblogbutton">
+          <Link to="/ViewAllBlog">
           <button>
             view all blog
           </button>
+          </Link>
         </div>
 
         {/* Homepage Signup */}

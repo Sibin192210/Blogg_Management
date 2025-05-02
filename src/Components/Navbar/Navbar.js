@@ -1,55 +1,66 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link, useNavigate } from "react-router-dom";
 import logo from "../../images/logo.png";
 import "./Navbar.css";
-import { Link } from "react-router-dom";
+import { FaRegUserCircle } from "react-icons/fa";
 
 function Navbar({ setIsContactOpen }) {
   const [navBackground, setNavBackground] = useState("transparent");
   const [isMobile, setIsMobile] = useState(window.innerWidth < 992);
-  const [navsize, setnavsize] = useState("14px")
+  const [navsize, setNavSize] = useState("14px");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const location = useLocation();
-  const solidPages = ["/Tajmahal","/Egypt","/Chinawall","/Antartica","/Boating","/Addblog"]; 
+  const navigate = useNavigate();
+  const solidPages = ["/Tajmahal", "/Egypt", "/Chinawall", "/Antartica", "/Boating", "/Addblog","/ViewAllBlog","/ViewOneBlog"];
   const isSolidPage = solidPages.includes(location.pathname);
 
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 50 || isSolidPage) {
         setNavBackground("#184E47");
-        setnavsize("4px");
+        setNavSize("4px");
       } else {
         setNavBackground("transparent");
-        setnavsize("14px");
+        setNavSize("14px");
       }
     };
-  
+
+    // Check if the user is logged in when the component mounts
+    const token = localStorage.getItem("authToken");
+    setIsLoggedIn(!!token); // If there's a token, the user is logged in
+
     // Set initial background based on route without waiting for scroll
     if (isSolidPage) {
       setNavBackground("#184E47");
-      setnavsize("4px");
+      setNavSize("4px");
     } else {
       handleScroll();
     }
-  
+
     window.addEventListener("scroll", handleScroll);
     window.addEventListener("resize", () => setIsMobile(window.innerWidth < 992));
-  
+
     return () => {
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("resize", () => setIsMobile(window.innerWidth < 992));
     };
   }, [isSolidPage]);
-  
+
+  const handleLogout = () => {
+    localStorage.removeItem("authToken"); // Clear the login token from localStorage
+    setIsLoggedIn(false); // Update the login state
+    navigate("/"); // Redirect to home or login page
+  };
+
   return (
     <nav
       className="navbar fixed-top navbar-expand-xxl"
       style={{
         backgroundColor: navBackground,
         padding: navsize,
-        transition: "all 0.4s ease", 
+        transition: "all 0.4s ease",
       }}
-      
     >
       <div className="container-fluid">
         <Link className="navbar-brand" to="/">
@@ -58,7 +69,7 @@ function Navbar({ setIsContactOpen }) {
         </Link>
         <button
           className="navbar-toggler bg-success"
-          onClick={()=>{setNavBackground("#184E47")}}
+          onClick={() => { setNavBackground("#184E47"); }}
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#navbarNavDropdown"
@@ -86,13 +97,26 @@ function Navbar({ setIsContactOpen }) {
               <Link className="nav-link" to="#" onClick={() => setIsContactOpen(true)}>Contact Us</Link>
             </li>
             <li className="nav-item dropdown">
-              <Link className="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Login
-              </Link>
+              {isLoggedIn ? (
+                <Link className="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <FaRegUserCircle  className="usercircleedit"/>
+                </Link>
+              ) : (
+                <Link className="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Login
+                </Link>
+              )}
               <ul className="dropdown-menu">
-                <li><Link className="dropdown-item" to="/login">Login</Link></li>
-                <li><Link className="dropdown-item" to="/signup">Sign up</Link></li>
-                <li><Link className="dropdown-item" to="/Adminlogin">Admin Login</Link></li>
+                {!isLoggedIn && (
+                  <>
+                    <li><Link className="dropdown-item" to="/login">Login</Link></li>
+                    <li><Link className="dropdown-item" to="/signup">Sign up</Link></li>
+                    <li><Link className="dropdown-item" to="/Adminlogin">Admin Login</Link></li>
+                  </>
+                )}
+                {isLoggedIn && (
+                  <li><button className="dropdown-item" onClick={handleLogout}>Logout</button></li>
+                )}
               </ul>
             </li>
           </ul>

@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { MdOutlineClose } from "react-icons/md";
 import './Addblog.css';
 
 const Addblog = () => {
   const [blogs, setBlogs] = useState([]);
-  const [showForm, setShowForm] = useState(true);
-
+  const [showForm, setShowForm] = useState(false);
   const [formData, setFormData] = useState({
     mainheading: '',
     authorname: '',
@@ -30,6 +29,9 @@ const Addblog = () => {
     corosal2: null,
     corosal3: null
   });
+
+  const isLoggedIn = localStorage.getItem('authToken');
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { id, value, type, files } = e.target;
@@ -56,13 +58,17 @@ const Addblog = () => {
 
       if (response.data.msg === 'Blog saved successfully') {
         alert('Blog posted successfully');
+
+        // ✅ FIXED: Include _id in new blog object
         setBlogs(prev => [
           ...prev,
           {
             ...formData,
+            _id: response.data.data._id,
             thumbnailimage: `/Blogimages/${response.data.data.thumbnailimage}`
           }
         ]);
+
         resetForm();
       } else {
         alert('Something went wrong');
@@ -103,6 +109,14 @@ const Addblog = () => {
     setShowForm(false);
   };
 
+  const handleCreateNewBlog = () => {
+    if (isLoggedIn) {
+      setShowForm(true);
+    } else {
+      navigate('/login');
+    }
+  };
+
   return (
     <div>
       {blogs.length > 0 && (
@@ -115,18 +129,20 @@ const Addblog = () => {
               <div className="card-body">
                 <h5 className="card-title">{blog.mainheading}</h5>
                 <p>{blog.subheading1 || blog.introduction?.slice(0, 60) + '...'}</p>
-                <Link to={`/blog/${idx}`} className="btn btn-primary">Read more...</Link>
+
+                {/* ✅ Works now because _id is present */}
+                <Link to={`/blog/${blog._id}`} className="btn btn-primary">Read more...</Link>
               </div>
             </div>
           ))}
         </div>
       )}
 
-      {!showForm && (
-        <button className="open-form-btn" onClick={() => setShowForm(true)}>Create New Blog</button>
-      )}
+      <button className="open-form-btn" onClick={handleCreateNewBlog}>
+        Create New Blog
+      </button>
 
-      {showForm && (
+      {showForm && isLoggedIn ? (
         <div className="Add-blog-parent">
           <div className="popupoverlay">
             <div className="blog-input-contents">
@@ -179,7 +195,9 @@ const Addblog = () => {
             </div>
           </div>
         </div>
-      )}
+      ) : !isLoggedIn ? (
+        <div className="login-warning">Please log in to upload a blog</div>
+      ) : null}
     </div>
   );
 };

@@ -15,6 +15,7 @@ function Login({ setShowNavbarFooter }) {
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [loginMessage, setLoginMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -27,19 +28,31 @@ function Login({ setShowNavbarFooter }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    // Simple client-side email validation
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!emailRegex.test(data.email)) {
+      setEmailError("Invalid email format");
+      return;
+    }
+
+    setIsLoading(true); // Show loading state
+
     axios
       .post("http://localhost:3003/loginDetails", data)
       .then((res) => {
+        setIsLoading(false); // Hide loading state
         if (!res.data.success) {
           setEmailError("Invalid email");
         } else if (res.data.data.password !== data.password) {
           setPasswordError("Incorrect password");
         } else {
           setLoginMessage("Login Success");
+          localStorage.setItem("authToken", res.data.token); // Store auth token if login is successful
           setTimeout(() => navigate("/"), 3000);
         }
       })
       .catch((err) => {
+        setIsLoading(false); // Hide loading state
         console.error("Login error:", err);
       });
   };
@@ -86,8 +99,8 @@ function Login({ setShowNavbarFooter }) {
         </p>
 
         <div className="d-grid">
-          <button className="btn btn-primary" type="submit">
-            Login
+          <button className="btn btn-primary" type="submit" disabled={isLoading}>
+            {isLoading ? "Loading..." : "Login"}
           </button>
         </div>
 

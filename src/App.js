@@ -17,6 +17,8 @@ import Aboutus from './Components/AboutUs/Aboutus';
 import Forgetpass from './Components/User/Forgetpass';
 import Adminlogin from './Components/Admin/Adminlogin';
 import Addblog from './AddBlog/Addblog';
+import ViewAllBlog from './Viewallblogs/ViewAllBlog';
+import ViewOneBlog from './ViewOneblog/ViewOneBlog';
 
 function App() {
   const [isContactOpen, setIsContactOpen] = useState(false);
@@ -36,7 +38,9 @@ function App() {
         <Route path="/Antartica" element={<Antartica/>} />
         <Route path="/Boating" element={<Boating />} />
         <Route path="/Aboutus" element={<Aboutus />} />  
-        <Route path='/Addblog' element={<Addblog />} />      
+        <Route path='/Addblog' element={<Addblog />} />     
+        <Route path='/ViewAllBlog' element={<ViewAllBlog/>}/> 
+        <Route path='/blog/:id' element={<ViewOneBlog/>} />  {/* Updated dynamic route */}
         <Route path="/Forgetpass" element={<Forgetpass setShowNavbarFooter={setShowNavbarFooter} />} />        
         <Route path="/Adminlogin" element={<Adminlogin setShowNavbarFooter={setShowNavbarFooter} />} />        
       </Routes>
